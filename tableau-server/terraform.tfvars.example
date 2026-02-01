@@ -1,0 +1,55 @@
+#############################################
+# Tableau Server on AWS - 変数設定サンプル
+#############################################
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+#
+# 重要: terraform.tfvars は .gitignore に含まれています
+# 機密情報が含まれるため、Gitにコミットしないでください
+#############################################
+
+# AWS設定
+aws_profile       = "your-aws-profile"    # AWS CLIプロファイル名（SSO認証用）
+aws_region        = "us-east-1"           # AWSリージョン
+availability_zone = "us-east-1a"          # アベイラビリティゾーン
+
+# EC2設定
+instance_type    = "r6i.xlarge"           # インスタンスタイプ（32GB RAM推奨、64GBならr6i.2xlarge）
+key_name         = "your-key-pair-name"   # EC2キーペア名（必須）
+root_volume_size = 100                    # ルートボリューム（GB）
+data_volume_size = 200                    # データボリューム（GB）
+
+# ネットワーク設定（デフォルトVPCを使用する場合は空のまま）
+# vpc_id    = "vpc-xxxxxxxxx"
+# subnet_id = "subnet-xxxxxxxxx"
+
+# アクセス制限（必須 - セキュリティのため必ず指定）
+allowed_ssh_cidrs  = ["10.0.0.0/8"]       # SSH接続を許可するCIDR（VPNのCIDRを指定）
+allowed_http_cidrs = ["0.0.0.0/0"]        # HTTP/HTTPS接続を許可するCIDR
+
+# Tableau Server設定
+tableau_version = "2025.3.2"              # Tableauバージョン（https://www.tableau.com/support/releases/server で確認）
+license_key     = "XXXX-XXXX-XXXX-XXXX-XXXX"  # ライセンスキー（必須）
+admin_username  = "admin"                 # 管理者ユーザー名
+admin_password  = "YourSecurePassword123" # 管理者パスワード（必須）
+
+# 登録情報（必須）
+reg_first_name = "Taro"
+reg_last_name  = "Yamada"
+reg_email      = "taro.yamada@example.com"
+reg_company    = "Example Company"
+reg_title      = "Engineer"
+reg_department = "IT"
+reg_phone      = "03-1234-5678"
+reg_city       = "Tokyo"
+reg_state      = "Tokyo"
+reg_zip        = "100-0001"
+reg_country    = "Japan"
+reg_industry   = "Technology"
+
+# プロジェクト設定
+project_name = "tableau-server"
+environment  = "dev"                      # dev/staging/prod
+
+# HTTPS設定
+enable_https = true                       # HTTPSを有効化するか
