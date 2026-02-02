@@ -6,19 +6,21 @@ EC2上にTableau Serverを自動構築します。
 
 - Terraform v1.0以上
 - AWS CLI認証済み（SSO対応）
-- EC2キーペア作成済み
 
 ## 手順
 
 ```bash
-# 1. 変数ファイルを作成・編集
-cp terraform.tfvars.example terraform.tfvars
-
-# 2. AWS認証
+# 1. AWS認証
 export AWS_PROFILE=your-profile-name
 aws sso login
 
-# 3. 実行（完了まで約40-50分）
+# 2. EC2キーペアを作成（初回のみ）
+../scripts/create-ec2-keypair.sh tableau-server-key
+
+# 3. 変数ファイルを作成・編集
+cp terraform.tfvars.example terraform.tfvars
+
+# 4. 実行（完了まで約40-50分）
 terraform init
 terraform plan
 terraform apply

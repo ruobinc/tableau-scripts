@@ -31,6 +31,9 @@ terraform.rc
 Thumbs.db
 
 
+# AWS credentials and keys
+.aws/
+
 # Other
 work/*
 RUOBIN_MEMO.md
