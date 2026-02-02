@@ -244,6 +244,24 @@ echo "[INFO] TSM初期化とサーバー起動が完了しました"
 docker exec "$CONTAINER_NAME" tsm status -v
 
 #############################################
+# フェーズ5.5: 初期管理者ユーザー作成
+#############################################
+
+echo ""
+echo "======================================"
+echo "フェーズ5.5: 初期管理者ユーザー作成"
+echo "======================================"
+
+echo "[INFO] 初期管理者ユーザーを作成しています..."
+docker exec "$CONTAINER_NAME" tabcmd initialuser \
+    --server "localhost:8080" \
+    --username "$TABLEAU_USERNAME" \
+    --password "$TABLEAU_PASSWORD"
+
+echo "[INFO] 初期管理者ユーザーの作成が完了しました"
+echo "[INFO] ユーザー名: $TABLEAU_USERNAME"
+
+#############################################
 # フェーズ6: HTTPS有効化（オプション）
 #############################################
 
