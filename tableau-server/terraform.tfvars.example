@@ -3,13 +3,9 @@
 #############################################
 # このファイルをコピーして terraform.tfvars を作成してください
 # cp terraform.tfvars.example terraform.tfvars
-#
-# 重要: terraform.tfvars は .gitignore に含まれています
-# 機密情報が含まれるため、Gitにコミットしないでください
 #############################################
 
 # AWS設定
-aws_profile       = "your-aws-profile"    # AWS CLIプロファイル名（SSO認証用）
 aws_region        = "us-east-1"           # AWSリージョン
 availability_zone = "us-east-1a"          # アベイラビリティゾーン
 
