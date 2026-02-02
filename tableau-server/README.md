@@ -11,7 +11,7 @@ EC2上にTableau Serverを自動構築します。
 
 ```bash
 # 0. AWSプロファイルの設定
-aws sso configure
+aws configure sso
 
 # 1. AWS認証
 export AWS_PROFILE=your-profile-name
