@@ -4,12 +4,15 @@ EC2上にTableau Serverを自動構築します。
 
 ## 前提条件
 
-- [Terraform](https://developer.hashicorp.com/terraform/install) v1.0以上
-- AWS CLI認証済み（SSO対応）
+- [Terraform](https://developer.hashicorp.com/terraform/install)
+- [AWS CLI](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/getting-started-install.html)
 
 ## 手順
 
 ```bash
+# 0. AWSプロファイルの設定
+aws sso configure
+
 # 1. AWS認証
 export AWS_PROFILE=your-profile-name
 aws sso login
