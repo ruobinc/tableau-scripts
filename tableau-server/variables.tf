@@ -80,7 +80,7 @@ variable "allowed_http_cidrs" {
 variable "tableau_version" {
   description = "Tableau Serverのバージョン（https://www.tableau.com/support/releases/server で確認）"
   type        = string
-  default     = "2025.3.2"
+  default     = "2025.3.1"
 }
 
 variable "license_key" {

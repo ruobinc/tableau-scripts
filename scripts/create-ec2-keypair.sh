@@ -8,7 +8,7 @@
 set -e
 
 KEY_NAME="${1:-tableau-server-key}"
-OUTPUT_DIR="${2:-.aws}"
+OUTPUT_DIR="${2:-../.aws}"
 
 # リージョンをAWS CLI設定から取得（AWS_DEFAULT_REGION → プロファイル設定 → フォールバック）
 REGION="${AWS_DEFAULT_REGION:-$(aws configure get region 2>/dev/null || echo "us-east-1")}"

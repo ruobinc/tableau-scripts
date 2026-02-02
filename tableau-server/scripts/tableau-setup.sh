@@ -198,7 +198,8 @@ echo "フェーズ4: ライセンスアクティベーション"
 echo "======================================"
 
 echo "[INFO] ライセンスキーをアクティベートしています..."
-docker exec "$CONTAINER_NAME" tsm licenses activate -k "$LICENSE_KEY"
+docker exec -e LICENSE_KEY="$LICENSE_KEY" "$CONTAINER_NAME" \
+    bash -c 'tsm licenses activate -k "$LICENSE_KEY"'
 echo "[INFO] ライセンスのアクティベートが完了しました"
 
 # 登録情報ファイル作成
@@ -253,10 +254,8 @@ echo "フェーズ5.5: 初期管理者ユーザー作成"
 echo "======================================"
 
 echo "[INFO] 初期管理者ユーザーを作成しています..."
-docker exec "$CONTAINER_NAME" tabcmd initialuser \
-    --server "localhost:8080" \
-    --username "$TABLEAU_USERNAME" \
-    --password "$TABLEAU_PASSWORD"
+docker exec -e TABLEAU_PASSWORD="$TABLEAU_PASSWORD" "$CONTAINER_NAME" \
+    bash -c 'tabcmd initialuser --server "localhost:8080" --username "'"$TABLEAU_USERNAME"'" --password "$TABLEAU_PASSWORD"'
 
 echo "[INFO] 初期管理者ユーザーの作成が完了しました"
 echo "[INFO] ユーザー名: $TABLEAU_USERNAME"

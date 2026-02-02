@@ -130,10 +130,6 @@ resource "aws_instance" "tableau_server" {
     http_put_response_hop_limit = 2
   }
 
-  # インスタンス作成完了を待つ
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 #############################################
@@ -147,9 +143,6 @@ resource "aws_eip" "tableau_server" {
   tags = {
     Name = "${var.project_name}-${var.environment}-eip"
   }
-
-  # インスタンスが作成されてからEIPを割り当てる
-  depends_on = [aws_instance.tableau_server]
 }
 
 #############################################
