@@ -34,6 +34,14 @@ curl -I http://<PUBLIC_IP>:3927/tableau-mcp
 - URL: http://<PUBLIC_IP>:3927/tableau-mcp
 - Claude Desktop: [claude_desktop_config_example.json](claude_desktop_config_example.json)
 
+## 設定変更の反映
+
+```bash
+terraform taint aws_instance.mcp_server && terraform apply -auto-approve
+```
+
+※ Elastic IPが設定されているため、IPアドレスは変わらない
+
 ## トラブルシューティング
 
 ```bash
