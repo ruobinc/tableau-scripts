@@ -4,6 +4,10 @@
 .terraform/
 .terraform.lock.hcl
 
+# Terraform plan files
+*.tfplan
+tfplan
+
 # Terraform crash log files
 crash.log
 crash.*.log
@@ -36,4 +40,3 @@ Thumbs.db
 
 # Other
 work/*
-RUOBIN_MEMO.md
