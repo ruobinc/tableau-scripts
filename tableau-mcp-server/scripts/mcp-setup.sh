@@ -37,6 +37,8 @@ JWT_SUB_CLAIM="${jwt_sub_claim}"
 MCP_SERVER_PORT="${mcp_server_port}"
 TRANSPORT_TYPE="${transport_type}"
 LOG_LEVEL="${log_level}"
+INCLUDE_TOOLS="${include_tools}"
+EXCLUDE_TOOLS="${exclude_tools}"
 
 # 作業ディレクトリ
 MCP_DIR="/opt/tableau-mcp"
@@ -182,6 +184,26 @@ cat >> "$MCP_DIR/.env" << EOF
 PORT=$MCP_SERVER_PORT
 TRANSPORT=$TRANSPORT_TYPE
 LOG_LEVEL=$LOG_LEVEL
+EOF
+
+# ツールフィルタリング設定（空でない場合のみ追加）
+if [ -n "$INCLUDE_TOOLS" ]; then
+    cat >> "$MCP_DIR/.env" << EOF
+
+# ツールフィルタリング（有効化）
+INCLUDE_TOOLS=$INCLUDE_TOOLS
+EOF
+    echo "[INFO] INCLUDE_TOOLS を設定しました: $INCLUDE_TOOLS"
+elif [ -n "$EXCLUDE_TOOLS" ]; then
+    cat >> "$MCP_DIR/.env" << EOF
+
+# ツールフィルタリング（除外）
+EXCLUDE_TOOLS=$EXCLUDE_TOOLS
+EOF
+    echo "[INFO] EXCLUDE_TOOLS を設定しました: $EXCLUDE_TOOLS"
+fi
+
+cat >> "$MCP_DIR/.env" << EOF
 
 # HTTP認証設定（開発/テスト環境用）
 DANGEROUSLY_DISABLE_OAUTH=true

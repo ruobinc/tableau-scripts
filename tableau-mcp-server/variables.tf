@@ -146,6 +146,18 @@ variable "log_level" {
   default     = "info"
 }
 
+variable "include_tools" {
+  description = "有効化するツールのリスト（カンマ区切り）。exclude_toolsと同時に指定不可"
+  type        = string
+  default     = ""
+}
+
+variable "exclude_tools" {
+  description = "除外するツールのリスト（カンマ区切り）。include_toolsと同時に指定不可"
+  type        = string
+  default     = ""
+}
+
 # タグ設定
 variable "project_name" {
   description = "プロジェクト名（タグ用）"

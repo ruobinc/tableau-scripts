@@ -48,6 +48,16 @@ mcp_server_port = 3927                    # MCPサーバーポート
 transport_type  = "http"                  # トランスポートタイプ
 log_level       = "info"                  # ログレベル（debug, info, warn, error）
 
+#############################################
+# ツールフィルタリング設定（どちらか一方のみ指定可）
+#############################################
+# INCLUDE_TOOLS: 指定したツールのみを有効化（カンマ区切り）
+# EXCLUDE_TOOLS: 指定したツールを除外（カンマ区切り）
+# ※両方同時に指定することはできません
+
+include_tools = ""  # 例: "datasource,view" または "list-workbooks,get-view-data"
+exclude_tools = ""  # 例: "pulse" または "generate-pulse-insight-brief"
+
 # プロジェクト設定
 project_name = "tableau-mcp-server"
 environment  = "dev"                      # dev/staging/prod

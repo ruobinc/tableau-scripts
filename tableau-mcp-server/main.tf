@@ -117,6 +117,8 @@ resource "aws_instance" "mcp_server" {
     mcp_server_port = var.mcp_server_port
     transport_type  = var.transport_type
     log_level       = var.log_level
+    include_tools   = var.include_tools
+    exclude_tools   = var.exclude_tools
   })
 
   tags = {
