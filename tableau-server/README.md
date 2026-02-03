@@ -17,7 +17,7 @@ aws configure sso
 export AWS_PROFILE=your-profile-name
 aws sso login
 
-# 2. EC2キーペアを作成（初回のみ）
+# 2. EC2キーペアを作成（キー作成が必要な場合のみ実行）
 # キーは ../.aws/tableau-server-key.pem に保存される
 ../scripts/create-ec2-keypair.sh tableau-server-key
 
@@ -25,9 +25,7 @@ aws sso login
 cp terraform.tfvars.example terraform.tfvars
 
 # 4. 実行（完了まで約40-50分）
-terraform init
-terraform plan
-terraform apply
+terraform init && terraform plan && terraform apply -auto-approve
 ```
 
 ## アクセス
@@ -38,9 +36,5 @@ terraform apply
 ## 削除
 
 ```bash
-terraform destroy
+terraform destroy -auto-approve
 ```
-
-## トラブルシューティング
-
-[DEBUG.md](DEBUG.md) を参照。
