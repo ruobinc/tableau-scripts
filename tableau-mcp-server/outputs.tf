@@ -19,17 +19,17 @@ output "mcp_server_url" {
 
 output "ssh_command" {
   description = "SSH接続コマンド"
-  value       = "ssh -i ~/.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip}"
+  value       = "ssh -i ../.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip}"
 }
 
 output "setup_log_command" {
   description = "セットアップログ確認コマンド"
-  value       = "ssh -i ~/.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip} 'tail -f /var/log/mcp-setup.log'"
+  value       = "ssh -i ../.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip} 'tail -f /var/log/mcp-setup.log'"
 }
 
 output "service_status_command" {
   description = "サービスステータス確認コマンド"
-  value       = "ssh -i ~/.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip} 'sudo systemctl status tableau-mcp'"
+  value       = "ssh -i ../.aws/${var.key_name}.pem ec2-user@${aws_eip.mcp_server.public_ip} 'sudo systemctl status tableau-mcp'"
 }
 
 output "important_notes" {
