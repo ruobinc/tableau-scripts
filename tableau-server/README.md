@@ -2,6 +2,10 @@
 
 EC2上にTableau Serverを自動構築します。
 
+## ⚠️ 注意事項
+
+この構成は**検証・学習目的**です。本番環境での使用は想定していません。
+
 ## 前提条件
 
 - [Terraform](https://developer.hashicorp.com/terraform/install)
