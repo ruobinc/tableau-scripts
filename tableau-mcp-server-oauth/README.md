@@ -29,7 +29,7 @@ cp terraform.tfvars.example terraform.tfvars
 # 3. デプロイ
 export AWS_PROFILE=your-profile-name
 aws sso login
-terraform init && terraform apply -auto-approve
+terraform init && terraform plan && terraform apply -auto-approve
 
 # 4. Tableau ServerのOAuth設定
 #    MCP ServerのDNSをredirect_uri_hostsに追加する
@@ -79,16 +79,10 @@ tsm pending-changes apply
 
 ```bash
 # MCP Serverログ
-ssh -i ~/.aws/your-key.pem ec2-user@<MCP_DNS> 'sudo journalctl -u tableau-mcp -f'
+ssh -i ../.aws/your-key.pem ec2-user@<MCP_DNS> 'sudo journalctl -u tableau-mcp -f'
 
 # OAuthエンドポイント確認
 curl -k https://<MCP_DNS>:3927/.well-known/oauth-authorization-server
-```
-
-## 設定変更の反映
-
-```bash
-terraform taint aws_instance.mcp_server && terraform apply -auto-approve
 ```
 
 ## 削除

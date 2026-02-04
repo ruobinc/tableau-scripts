@@ -27,7 +27,7 @@ cp terraform.tfvars.example terraform.tfvars
 # 3. デプロイ
 export AWS_PROFILE=your-profile-name
 aws sso login
-terraform init && terraform apply -auto-approve
+terraform init && terraform plan && terraform apply -auto-approve
 
 # 4. 確認（デプロイ後3-5分待機）
 curl -I http://<PUBLIC_IP>:3927/tableau-mcp
@@ -37,23 +37,16 @@ curl -I http://<PUBLIC_IP>:3927/tableau-mcp
 - URL: http://<PUBLIC_IP>:3927/tableau-mcp
 - Claude Desktop: [claude_desktop_config_example.json](claude_desktop_config_example.json)
 
-## 設定変更の反映
-
-```bash
-terraform taint aws_instance.mcp_server && terraform apply -auto-approve
-```
-
-※ Elastic IPが設定されているため、IPアドレスは変わらない
 
 ## トラブルシューティング
 
 ```bash
 # ログ確認
-ssh -i ~/.aws/your-key.pem ec2-user@<DNS> 'cat /var/log/mcp-setup.log'
-ssh -i ~/.aws/your-key.pem ec2-user@<DNS> 'sudo journalctl -u tableau-mcp -f'
+ssh -i ../.aws/your-key.pem ec2-user@<DNS> 'cat /var/log/mcp-setup.log'
+ssh -i ../.aws/your-key.pem ec2-user@<DNS> 'sudo journalctl -u tableau-mcp -f'
 
 # 再起動
-ssh -i ~/.aws/your-key.pem ec2-user@<DNS> 'sudo systemctl restart tableau-mcp'
+ssh -i ../.aws/your-key.pem ec2-user@<DNS> 'sudo systemctl restart tableau-mcp'
 ```
 
 ## 削除
