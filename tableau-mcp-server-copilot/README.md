@@ -34,11 +34,6 @@ terraform init && terraform plan && terraform apply -auto-approve
 # 4. 確認（デプロイ後3-5分待機）
 curl -I http://<PUBLIC_IP>:3928/tableau-mcp
 ```
-
-## 接続
-- URL: http://<PUBLIC_IP>:3928/tableau-mcp
-- Claude Desktop: [claude_desktop_config_example.json](claude_desktop_config_example.json)
-
 ```
 
 ## 削除
@@ -50,5 +45,7 @@ terraform destroy -auto-approve
 ## 参考リンク
 
 - [Tableau MCP GitHub](https://github.com/tableau/tableau-mcp)
-- [Tableau Personal Access Tokens](https://help.tableau.com/current/server/en-us/security_personal_access_tokens.htm)
-- [Tableau Connected Apps](https://help.tableau.com/current/server/en-us/connected_apps.htm)
+- [Copilot Studio MCP Client is incompatible with Servers using python SDK](https://community.powerplatform.com/forums/thread/details/?threadid=7ec056e9-f950-f011-877a-7c1e5247028a)
+- [MS Copilot Sutdio Troubleshooting Model Context Protocol (MCP) integration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-troubleshooting)
+- [MCP Schema](https://modelcontextprotocol.io/specification/2025-11-25/schema#requestid)
+
