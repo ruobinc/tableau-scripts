@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "tableau": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://<Tableau MCP Server URL:3927>/tableau-mcp",
+        "--allow-http"
+      ]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+#############################################
+# Tableau MCP Server on AWS - 変数設定サンプル
+#############################################
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+#############################################
+
+# AWS設定（認証はAWS_PROFILE環境変数を使用）
+aws_region        = "us-east-2"           # AWSリージョン
+availability_zone = "us-east-2a"          # アベイラビリティゾーン
+
+# EC2設定
+instance_type    = "t3.small"             # インスタンスタイプ（MCPサーバーは軽量）
+key_name         = "your-key-name"        # EC2キーペア名（事前に作成）
+root_volume_size = 30                     # ルートボリューム（GB）- AL2023は最低30GB必要
+
+# ネットワーク設定（デフォルトVPCを使用する場合は空のまま）
+# vpc_id    = "vpc-xxxxxxxxx"
+# subnet_id = "subnet-xxxxxxxxx"
+
+# アクセス制限（必須 - セキュリティのため必ず指定）
+allowed_ssh_cidrs = ["YOUR_IP/32"]        # SSH接続を許可するCIDR（例: "203.0.113.10/32"）
+allowed_mcp_cidrs = ["0.0.0.0/0"]         # MCP接続を許可するCIDR
+
+# Tableau接続設定
+tableau_server_url = "https://your-server.tableau.com"  # Tableau Server/Cloud URL
+tableau_site_name  = ""                                  # サイト名（デフォルトサイトは空）
+
+#############################################
+# 認証設定（PAT または direct-trust を選択）
+#############################################
+
+# 認証方式: "pat" または "direct-trust"
+auth_method = "pat"
+
+# ===== PAT認証の場合（auth_method = "pat"）=====
+pat_name  = "your-pat-name"               # Personal Access Token名
+pat_value = "YOUR_PAT_VALUE_HERE"         # Personal Access Token値（機密情報）
+
+# ===== Direct-Trust認証の場合（auth_method = "direct-trust"）=====
+# connected_app_client_id    = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# connected_app_secret_id    = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# connected_app_secret_value = "YOUR_SECRET_VALUE_HERE"  # 機密情報
+# jwt_sub_claim              = "user@example.com"
+
+# MCP Server設定
+mcp_server_port = 3927                    # MCPサーバーポート
+transport_type  = "http"                  # トランスポートタイプ
+log_level       = "info"                  # ログレベル（debug, info, warn, error）
+
+#############################################
+# ツールフィルタリング設定（どちらか一方のみ指定可）
+#############################################
+# INCLUDE_TOOLS: 指定したツールのみを有効化（カンマ区切り）
+# EXCLUDE_TOOLS: 指定したツールを除外（カンマ区切り）
+# ※両方同時に指定することはできません
+
+include_tools = ""  # 例: "datasource,view" または "list-workbooks,get-view-data"
+exclude_tools = ""  # 例: "pulse" または "generate-pulse-insight-brief"
+
+# プロジェクト設定
+project_name = "tableau-mcp-server"
+environment  = "dev"                      # dev/staging/prod
+
+# HTTPS設定
+enable_https = false                      # 本番環境ではtrueを推奨

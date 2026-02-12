@@ -1,0 +1,77 @@
+#############################################
+# Tableau MCP Server OAuth版 - 変数設定サンプル
+#############################################
+# このファイルをコピーして terraform.tfvars を作成してください
+# cp terraform.tfvars.example terraform.tfvars
+#############################################
+
+# AWS設定（認証はAWS_PROFILE環境変数を使用）
+aws_region        = "us-east-2"
+availability_zone = "us-east-2a"
+
+# EC2設定
+instance_type    = "t3.small"
+key_name         = "your-key-name"
+root_volume_size = 30
+
+# ネットワーク設定（デフォルトVPCを使用する場合は空のまま）
+# vpc_id    = "vpc-xxxxxxxxx"
+# subnet_id = "subnet-xxxxxxxxx"
+
+# アクセス制限（必須 - セキュリティのため必ず指定）
+allowed_ssh_cidrs = ["YOUR_IP/32"]
+allowed_mcp_cidrs = ["0.0.0.0/0"]
+
+# Tableau接続設定
+tableau_server_url = "https://your-server.tableau.com"
+tableau_site_name  = ""
+
+#############################################
+# 認証設定（OAuth推奨）
+#############################################
+
+auth_method = "oauth"
+
+# ===== OAuth認証の場合（auth_method = "oauth"）=====
+oauth_issuer                 = "https://your-auth-server.com"
+oauth_redirect_uri           = "https://your-mcp-server.com/oauth/callback"
+oauth_client_id_secret_pairs = "client_id_1:client_secret_1"
+oauth_jwe_private_key        = <<-EOT
+-----BEGIN RSA PRIVATE KEY-----
+YOUR_PRIVATE_KEY_HERE
+-----END RSA PRIVATE KEY-----
+EOT
+# oauth_jwe_private_key_passphrase = ""  # オプション
+oauth_lock_site                     = true
+oauth_authorization_code_timeout_ms = 600000     # 10分
+oauth_access_token_timeout_ms       = 3600000    # 1時間
+oauth_refresh_token_timeout_ms      = 2592000000 # 30日
+
+# CORS設定
+cors_origin = "*"
+
+# ===== PAT認証の場合（auth_method = "pat"）=====
+# pat_name  = "your-pat-name"
+# pat_value = "YOUR_PAT_VALUE_HERE"
+
+# ===== Direct-Trust認証の場合（auth_method = "direct-trust"）=====
+# connected_app_client_id    = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# connected_app_secret_id    = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# connected_app_secret_value = "YOUR_SECRET_VALUE_HERE"
+# jwt_sub_claim              = "user@example.com"
+
+# MCP Server設定
+mcp_server_port = 3927
+transport_type  = "http"
+log_level       = "info"
+
+# ツールフィルタリング設定
+include_tools = ""
+exclude_tools = ""
+
+# プロジェクト設定
+project_name = "tableau-mcp-server-oauth"
+environment  = "dev"
+
+# HTTPS設定（OAuth使用時は推奨）
+enable_https = false
