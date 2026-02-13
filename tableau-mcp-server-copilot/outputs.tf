@@ -55,24 +55,10 @@ output "important_notes" {
     3. MCPサーバー接続テスト:
        $ curl -I http://${aws_eip.mcp_server.public_ip}:${var.mcp_server_port}/tableau-mcp
 
-    4. Claude Desktop設定（settings.json）:
-        {
-          "mcpServers": {
-            "tableau-mcp-remote": {
-              "command": "npx",
-              "args": [
-                "mcp-remote",
-                "http://${aws_eip.mcp_server.public_ip}:${var.mcp_server_port}/tableau-mcp",
-                "--allow-http"
-              ]
-            }
-          }
-        }
-
-    5. Copilot Studio設定:
+    4. Copilot Studio設定:
        Server URL: http://${aws_eip.mcp_server.public_ip}:${var.proxy_server_port}/tableau-mcp
 
-    6. トラブルシューティング:
+    5. トラブルシューティング:
        $ sudo journalctl -u tableau-mcp -f
        $ sudo journalctl -u mcp-proxy -f
 
