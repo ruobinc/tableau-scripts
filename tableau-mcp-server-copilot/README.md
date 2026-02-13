@@ -34,7 +34,7 @@ terraform init && terraform plan && terraform apply -auto-approve
 # 4. 確認（デプロイ後3-5分待機）
 curl -I http://<PUBLIC_IP>:3928/tableau-mcp
 ```
-```
+
 
 ## 削除
 
