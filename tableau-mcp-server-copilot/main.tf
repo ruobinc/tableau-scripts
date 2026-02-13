@@ -122,8 +122,10 @@ resource "aws_instance" "mcp_server" {
     exclude_tools   = var.exclude_tools
 
     # プロキシ設定
-    proxy_server_port = var.proxy_server_port
-    enable_proxy      = var.enable_proxy
+    proxy_server_port    = var.proxy_server_port
+    enable_proxy         = var.enable_proxy
+    proxy_package_json   = file("${path.module}/scripts/proxy/package.json")
+    proxy_server_js      = file("${path.module}/scripts/proxy/proxy-server.js")
   }))
 
   tags = {
